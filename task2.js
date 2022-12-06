@@ -7,24 +7,24 @@
 // give the user 1 point, otherwise, give the user 0 points.
 // User story: User can decide to play the game as long as they want to
 
-const enterNumber = () =>{
-    return new Promise((resolve, reject) =>{
+const enterNumber = () => {
+    return new Promise((resolve, reject) => {
         const userNumber = Number(window.prompt("Enter a number (1 - 6)"))
         const randomNumber = Math.floor(Math.random() * 6 + 1);
 
-        if(isNaN(userNumber)){
+        if (isNaN(userNumber)) {
             reject(new Error("Wrong input Type"))
         }
 
-        if(userNumber === randomNumber){
+        if (userNumber === randomNumber) {
             resolve({
                 points: 2,
                 randomNumber,
             })
-        }else if (
+        } else if (
             userNumber === randomNumber - 1 ||
             userNumber === randomNumber + 1
-        ){
+        ) {
             resolve({
                 points: 1,
                 randomNumber,
@@ -38,11 +38,11 @@ const enterNumber = () =>{
     })
 }
 
-const continueGame = () =>{
-    return new Promise((resolve) =>{
-        if(window.confirm("Do you want to continue?")){
+const continueGame = () => {
+    return new Promise((resolve) => {
+        if (window.confirm("Do you want to continue?")) {
             resolve(true)
-        }else{
+        } else {
             resolve(false)
         }
     })
@@ -64,15 +64,15 @@ const continueGame = () =>{
 }
 */
 
-const handleGuess = async () =>{
+const handleGuess = async () => {
     try {
         const result = await enterNumber();
         alert(`Dice: ${result.randomNumber}: you got ${result.points} points`);
         const isContinuing = await continueGame()
 
-        if(isContinuing){
+        if (isContinuing) {
             handleGuess()
-        }else{
+        } else {
             alert("Game Ends")
         }
     } catch (error) {
