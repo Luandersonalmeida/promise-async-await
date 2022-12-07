@@ -14,16 +14,13 @@ const fetchCountry = async (alpha3Code) => {
   }
 };
 
-const fetchCountryAndNeigbors = async () =>{
+const fetchCountryAndNeigbors = async () => {
   const columbia = await fetchCountry("col");
 
-  const neighbors = await Promise.all( 
-    /*columbia.forEach(element => {
-      console.log(element.borders, "teste")
-      
-    })*/
-    columbia.borders.map((border)=> fetchCountry(border))
-    );
+  const neighbors = await Promise.all(
+
+    columbia.borders.map((border) => fetchCountry(border))
+  );
   console.log(neighbors);
 }
 
